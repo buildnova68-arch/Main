@@ -31,13 +31,23 @@ export default function ContactSlide({ isVisible }: { isVisible: boolean }) {
         </div>
         
         <div className="space-y-3 sm:space-y-4 font-mono text-xs sm:text-sm">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-muted-foreground hover:text-primary transition-colors break-all sm:break-normal justify-center md:justify-start">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 break-all sm:break-normal justify-center md:justify-start">
             <span className="hidden sm:block w-8 h-px bg-primary/50 shrink-0" />
-            SYSTEM.HQ@NOVABUILD.DEV
+            <a
+              href={`mailto:${t.contactEmail}`}
+              className="text-muted-foreground transition-colors hover:text-primary"
+            >
+              {t.contactEmail}
+            </a>
           </div>
-          <div className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors justify-center md:justify-start">
+          <div className="flex items-center gap-4 justify-center md:justify-start">
             <span className="hidden sm:block w-8 h-px bg-primary/50 shrink-0" />
-            +1 (555) 019-9923
+            <a
+              href={`tel:${t.contactPhone.replace(/\s/g, "")}`}
+              className="text-muted-foreground transition-colors hover:text-primary"
+            >
+              {t.contactPhone}
+            </a>
           </div>
         </div>
       </div>

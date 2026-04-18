@@ -20,6 +20,8 @@ export interface Messages {
   serviceAiDesc: string;
   contactTitle: string;
   contactLead: string;
+  contactEmail: string;
+  contactPhone: string;
   toastTitle: string;
   toastDescription: string;
   formNameLabel: string;
@@ -62,6 +64,8 @@ export const messages: Record<Locale, Messages> = {
     contactTitle: "Initiate.",
     contactLead:
       "Ready to build the future? Connect with our engineering team to discuss your next breakthrough project.",
+    contactEmail: "buildnova68@gmail.com",
+    contactPhone: "+212772594579",
     toastTitle: "Transmission Received",
     toastDescription: "We'll be in contact shortly.",
     formNameLabel: "Identity",
@@ -102,6 +106,8 @@ export const messages: Record<Locale, Messages> = {
     contactTitle: "Initiez.",
     contactLead:
       "Prêt à construire l’avenir ? Échangez avec notre équipe d’ingénierie sur votre prochain projet d’envergure.",
+    contactEmail: "buildnova68@gmail.com",
+    contactPhone: "+212772594579",
     toastTitle: "Transmission reçue",
     toastDescription: "Nous vous recontacterons très prochainement.",
     formNameLabel: "Identité",
