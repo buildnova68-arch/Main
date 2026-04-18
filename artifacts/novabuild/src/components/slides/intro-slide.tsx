@@ -1,4 +1,4 @@
-import Logo3D from "@/components/3d-logo";
+import NovaCore from "@/components/3d-logo";
 import { Button } from "@/components/ui/button";
 
 export default function IntroSlide({ isVisible }: { isVisible: boolean }) {
@@ -31,8 +31,8 @@ export default function IntroSlide({ isVisible }: { isVisible: boolean }) {
         </div>
       </div>
       
-      <div className="flex-1 flex justify-center items-center relative perspective-1000">
-        <Logo3D active={isVisible} />
+      <div className="flex-1 flex justify-center items-center relative">
+        <NovaCore active={isVisible} />
       </div>
     </div>
   );
