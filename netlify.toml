@@ -1,0 +1,18 @@
+# Netlify — NovaBuild Vite app (pnpm workspace: artifacts/novabuild)
+# Dashboard: connect repo → Netlify reads this file for build settings.
+
+[build]
+  command = "pnpm install && pnpm --filter @workspace/novabuild run build"
+  publish = "artifacts/novabuild/dist/public"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Required by artifacts/novabuild/vite.config.ts (validated at config load)
+  PORT = "5173"
+  BASE_PATH = "/"
+
+# SPA (wouter): direct loads and refresh on any path serve index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
