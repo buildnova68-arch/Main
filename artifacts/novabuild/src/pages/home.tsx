@@ -3,8 +3,11 @@ import IntroSlide from "@/components/slides/intro-slide";
 import ServicesSlide from "@/components/slides/services-slide";
 import ContactSlide from "@/components/slides/contact-slide";
 import Particles from "@/components/ui/particles";
+import { useLocale } from "@/contexts/locale-context";
+import { interpolateNavSlide } from "@/lib/translations";
 
 export default function Home() {
+  const { t } = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -52,7 +55,7 @@ export default function Home() {
 
   return (
     <div 
-      className="h-screen w-full bg-background text-foreground overflow-hidden relative"
+      className="h-[100dvh] min-h-0 w-full bg-background text-foreground overflow-hidden relative"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -63,7 +66,7 @@ export default function Home() {
       <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/10 blur-[120px] pointer-events-none z-0" />
 
       {/* Navigation Indicators */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex gap-4">
+      <div className="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 flex gap-3 sm:gap-4 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         {[0, 1, 2].map((idx) => (
           <button
             key={idx}
@@ -71,7 +74,7 @@ export default function Home() {
             className={`h-1.5 rounded-full transition-all duration-500 ${
               currentSlide === idx ? "w-8 bg-primary" : "w-2 bg-white/20 hover:bg-white/40"
             }`}
-            aria-label={`Go to slide ${idx + 1}`}
+            aria-label={interpolateNavSlide(t.navGoToSlide, idx + 1)}
           />
         ))}
       </div>
@@ -79,18 +82,21 @@ export default function Home() {
       {/* Slide Container */}
       <div 
         ref={containerRef}
-        className="flex h-full w-[300vw] transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform z-10 relative"
+        className="flex h-full min-h-0 w-[300vw] transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform z-10 relative"
         style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
       >
-        <section className="h-full w-screen shrink-0 relative flex items-center justify-center p-6 md:p-24">
-          <IntroSlide isVisible={currentSlide === 0} />
+        <section className="min-h-full h-full w-screen shrink-0 relative flex items-start sm:items-center justify-center overflow-y-auto overscroll-y-contain px-4 pt-6 pb-28 sm:pb-24 sm:p-6 md:p-24 [scrollbar-gutter:stable]">
+          <IntroSlide
+            isVisible={currentSlide === 0}
+            onExploreWork={() => setCurrentSlide(1)}
+          />
         </section>
         
-        <section className="h-full w-screen shrink-0 relative flex items-center justify-center p-6 md:p-24">
+        <section className="min-h-full h-full w-screen shrink-0 relative flex items-start sm:items-center justify-center overflow-y-auto overscroll-y-contain px-4 pt-6 pb-28 sm:pb-24 sm:p-6 md:p-24 [scrollbar-gutter:stable]">
           <ServicesSlide isVisible={currentSlide === 1} />
         </section>
         
-        <section className="h-full w-screen shrink-0 relative flex items-center justify-center p-6 md:p-24">
+        <section className="min-h-full h-full w-screen shrink-0 relative flex items-start sm:items-center justify-center overflow-y-auto overscroll-y-contain px-4 pt-6 pb-28 sm:pb-24 sm:p-6 md:p-24 [scrollbar-gutter:stable]">
           <ContactSlide isVisible={currentSlide === 2} />
         </section>
       </div>
