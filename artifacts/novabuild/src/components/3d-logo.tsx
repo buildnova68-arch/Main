@@ -1,21 +1,35 @@
+import { useEffect, useState } from "react";
+
 export default function NovaCore({ active }: { active: boolean }) {
-  const animationState = active ? "running" : "paused";
+  const [pulse, setPulse] = useState(0);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const timer = window.setInterval(() => {
+      setPulse((value) => (value + 1) % 4);
+    }, 1400);
+
+    return () => window.clearInterval(timer);
+  }, [active]);
 
   return (
     <div className="relative w-72 h-72 md:w-[28rem] md:h-[28rem] flex items-center justify-center">
-      <div className="absolute inset-0 rounded-full bg-cyan-400/15 blur-[72px] animate-pulse-glow" style={{ animationPlayState: animationState }} />
+      <div className="absolute inset-0 rounded-full bg-cyan-400/15 blur-[80px] animate-pulse-glow" />
       <div className="absolute inset-10 rounded-full bg-purple-500/10 blur-[70px]" />
 
       {[0, 1, 2].map((ring) => (
         <div
           key={ring}
-          className="nova-core-ring absolute rounded-full border border-cyan-300/25"
+          className={`absolute rounded-full border ${
+            ring === pulse
+              ? "border-cyan-200/70 shadow-[0_0_40px_rgba(0,240,255,0.55)]"
+              : "border-cyan-300/20"
+          }`}
           style={{
             inset: `${ring * 9 + 6}%`,
             animation: `spin ${18 + ring * 9}s linear infinite`,
             animationDirection: ring % 2 === 0 ? "normal" : "reverse",
-            animationDelay: `${ring * -1.4}s`,
-            animationPlayState: animationState,
           }}
         />
       ))}
@@ -26,9 +40,9 @@ export default function NovaCore({ active }: { active: boolean }) {
       <div className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full border border-cyan-200/30 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.28),rgba(14,165,233,0.08)_38%,rgba(2,6,23,0.04)_68%,transparent_70%)] shadow-[inset_0_0_40px_rgba(0,240,255,0.22),0_0_80px_rgba(0,240,255,0.32)]" />
 
       <div className="relative w-44 h-44 md:w-60 md:h-60 rounded-full flex items-center justify-center overflow-hidden border border-white/10 bg-slate-950/45 backdrop-blur-md shadow-[0_0_55px_rgba(0,240,255,0.45)]">
-        <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent,rgba(34,211,238,0.5),transparent,rgba(168,85,247,0.35),transparent)] animate-spin opacity-70" style={{ animationPlayState: animationState }} />
+        <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent,rgba(34,211,238,0.5),transparent,rgba(168,85,247,0.35),transparent)] animate-spin opacity-70" />
         <div className="absolute inset-4 rounded-full bg-slate-950/80 border border-cyan-200/20" />
-        <div className="absolute inset-8 rounded-full bg-cyan-300/10 blur-xl animate-pulse" style={{ animationPlayState: animationState }} />
+        <div className="absolute inset-8 rounded-full bg-cyan-300/10 blur-xl animate-pulse" />
         <div className="relative text-center">
           <div className="text-5xl md:text-7xl font-bold tracking-[-0.14em] pr-3 text-white drop-shadow-[0_0_22px_rgba(0,240,255,0.95)]">
             NB

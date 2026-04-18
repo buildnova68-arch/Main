@@ -1,42 +1,47 @@
-import { type TouchEvent, useEffect, useRef, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import IntroSlide from "@/components/slides/intro-slide";
 import ServicesSlide from "@/components/slides/services-slide";
 import ContactSlide from "@/components/slides/contact-slide";
 import Particles from "@/components/ui/particles";
 
 export default function Home() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const isScrollingRef = useRef(false);
-  const touchStartXRef = useRef(0);
 
   const slides = 3;
 
   useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let isScrolling = false;
+
     const handleWheel = (e: WheelEvent) => {
-      if (isScrollingRef.current) return;
+      if (isScrolling) return;
 
       if (e.deltaY > 50 || e.deltaX > 50) {
-        isScrollingRef.current = true;
+        isScrolling = true;
         setCurrentSlide((prev) => Math.min(prev + 1, slides - 1));
-        window.setTimeout(() => (isScrollingRef.current = false), 800);
+        setTimeout(() => (isScrolling = false), 800);
       } else if (e.deltaY < -50 || e.deltaX < -50) {
-        isScrollingRef.current = true;
+        isScrolling = true;
         setCurrentSlide((prev) => Math.max(prev - 1, 0));
-        window.setTimeout(() => (isScrollingRef.current = false), 800);
+        setTimeout(() => (isScrolling = false), 800);
       }
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: true });
+    window.addEventListener("wheel", handleWheel, { passive: false });
     return () => window.removeEventListener("wheel", handleWheel);
   }, []);
 
-  const handleTouchStart = (e: TouchEvent) => {
-    touchStartXRef.current = e.touches[0].clientX;
+  let startX = 0;
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startX = e.touches[0].clientX;
   };
 
-  const handleTouchEnd = (e: TouchEvent) => {
+  const handleTouchEnd = (e: React.TouchEvent) => {
     const endX = e.changedTouches[0].clientX;
-    const diff = touchStartXRef.current - endX;
+    const diff = startX - endX;
 
     if (diff > 50) {
       setCurrentSlide((prev) => Math.min(prev + 1, slides - 1));
@@ -73,18 +78,19 @@ export default function Home() {
 
       {/* Slide Container */}
       <div 
+        ref={containerRef}
         className="flex h-full w-[300vw] transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform z-10 relative"
         style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
       >
-        <section className="h-full w-screen shrink-0 relative flex items-center justify-center p-6 md:p-24" aria-hidden={currentSlide !== 0}>
+        <section className="h-full w-screen shrink-0 relative flex items-center justify-center p-6 md:p-24">
           <IntroSlide isVisible={currentSlide === 0} />
         </section>
         
-        <section className="h-full w-screen shrink-0 relative flex items-center justify-center p-6 md:p-24" aria-hidden={currentSlide !== 1}>
+        <section className="h-full w-screen shrink-0 relative flex items-center justify-center p-6 md:p-24">
           <ServicesSlide isVisible={currentSlide === 1} />
         </section>
         
-        <section className="h-full w-screen shrink-0 relative flex items-center justify-center p-6 md:p-24" aria-hidden={currentSlide !== 2}>
+        <section className="h-full w-screen shrink-0 relative flex items-center justify-center p-6 md:p-24">
           <ContactSlide isVisible={currentSlide === 2} />
         </section>
       </div>
