@@ -1,0 +1,59 @@
+Design and generate a modern, high-end, futuristic website for a tech company named NOVABUILD.
+
+Company description:
+We are a team that builds real business solutions using IT, including:
+
+Web applications
+Mobile applications
+Desktop software
+AI-powered applications
+🎨 Design Style (Very Important)
+Inspired by a cosmic / futuristic / sci-fi aesthetic
+Dark background (deep space tones: black, navy, dark blue)
+Glowing neon accents (cyan / electric blue / white light)
+Use light flares, particles, stars, and energy bursts
+Typography: sleek, metallic, futuristic (similar to the provided logo style)
+Overall feeling: premium, innovative, powerful, “next-gen technology”
+🖱️ User Experience / Navigation
+The website must use a horizontal slide-based scrolling system
+Each scroll (mouse wheel or swipe) transitions from right to left
+Smooth, animated transitions (parallax + easing effects)
+Fullscreen sections (each section = one slide)
+🧩 Page Structure (3 Slides)
+1. Hero Section (First Slide)
+Center a 3D animated object or logo (inspired by the glowing starburst style in the image)
+The 3D element should:
+Emit light / energy
+Have subtle rotation or floating animation
+Company name: NOVABUILD
+Tagline example: “Building Real Business Solutions with Technology”
+Add a soft glowing aura behind the 3D element
+Minimal text, very visual impact
+2. Services Section (Second Slide)
+Display services with icons or cards:
+Web Development
+Mobile Apps
+Desktop Software
+AI Solutions
+Each service should:
+Glow on hover
+Have subtle animation (scale / light pulse)
+Layout: grid or horizontal cards
+Keep the futuristic theme consistent
+3. Contact Section (Last Slide)
+Clean and simple layout
+Include:
+Contact form (Name, Email, Message)
+Optional: social links or email
+Use glowing input fields and animated focus effects
+Add a subtle animated background (particles or light waves)
+⚙️ Technical Requirements
+Use modern web technologies (React / Next.js preferred)
+Include smooth animations (Framer Motion or GSAP)
+Responsive design (desktop + mobile)
+Optimize for performance
+Optional: include Three.js for the 3D element
+✨ Extra Effects
+Light streaks or energy trails during slide transitions
+Subtle starfield moving in the background
+Glow and bloom effects on key elements
